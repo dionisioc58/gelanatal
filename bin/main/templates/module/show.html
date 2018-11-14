@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>Show Module</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1>Show Module</h1>
+		<hr />
+		<div class="form-group"> 
+			<label for="code">Code: </label>  
+			<span th:text="${module.code}"></span> 
+		</div> 
+		<div class="form-group"> 
+			<label for="name">Name: </label>  
+			<span th:text="${module.name}"></span> 
+		</div> 
+		
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Name</th> 
+					<th>Email</th> 
+					<th>Registration</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="student : ${module.students}">
+					<td th:text="${student.name}"></td> 
+					<td th:text="${student.email}"></td>
+					<td th:text="${student.registration}"></td>  
+				</tr>
+			</tbody>
+		</table>
+		
+		<a th:href="@{/modules}" class="btn btn-primary">Back to list Module</a>
+		<a th:href="@{/modules/{id}/edit(id = ${module.id})}" class="btn btn-info">Edit this record</a>
+		<a th:href="${module.id +'/delete'}" class="btn btn-danger">Delete this record</a>
+		
+	</div>
+</body>
+</html>
