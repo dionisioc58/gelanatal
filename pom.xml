@@ -5,12 +5,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example</groupId>
-	<artifactId>school2</artifactId>
+	<artifactId>gelanatal</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Projeto Gela Natal</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
