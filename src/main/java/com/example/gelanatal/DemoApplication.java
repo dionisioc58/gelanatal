@@ -1,4 +1,4 @@
-package com.example.school2;
+package com.example.gelanatal;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
