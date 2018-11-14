@@ -1,0 +1,14 @@
+com/example/controller/ModuleController.class
+com/example/repository/ModuleRepository.class
+com/example/service/ModuleService.class
+com/example/model/Module.class
+com/example/repository/PrincipalRepository.class
+com/example/repository/StudentRepository.class
+com/example/model/Principal.class
+com/example/controller/PrincipalController.class
+com/example/service/StudentService.class
+com/example/controller/StudentController.class
+com/example/gelanatal/DemoApplication.class
+com/example/model/Student.class
+com/example/controller/HomeController.class
+com/example/service/PrincipalService.class
