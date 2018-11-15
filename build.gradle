@@ -24,7 +24,9 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'2.0.4.RELEASE'
     compile group: 'javax.xml.bind', name: 'jaxb-api', version:'2.3.0'
     compile group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version:'2.3.0'
-    // runtime group: 'mysql', name: 'mysql-connector-java', version:'5.1.46'
+    //compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
+
+    runtime group: 'mysql', name: 'mysql-connector-java', version:'5.1.46'
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'2.0.4.RELEASE'
     // https://mvnrepository.com/artifact/org.hsqldb/hsqldb
 	// testCompile group: 'org.hsqldb', name: 'hsqldb', version: '2.4.1'
