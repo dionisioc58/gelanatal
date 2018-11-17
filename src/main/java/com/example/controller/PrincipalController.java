@@ -123,5 +123,5 @@ public class PrincipalController {
 	private static final String MSG_SUCESS_INSERT = "Principal inserted successfully.";
 	private static final String MSG_SUCESS_UPDATE = "Principal successfully changed.";
 	private static final String MSG_SUCESS_DELETE = "Deleted Principal successfully.";
-	private static final String MSG_ERROR = "Erro na inserção do Principal";
+	private static final String MSG_ERROR = "Erro na insercao do Principal";
 }

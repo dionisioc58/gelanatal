@@ -134,7 +134,7 @@ public class StudentController {
 	private static final String MSG_SUCESS_INSERT = "Student inserted successfully.";
 	private static final String MSG_SUCESS_UPDATE = "Student successfully changed.";
 	private static final String MSG_SUCESS_DELETE = "Deleted Student successfully.";
-	private static final String MSG_ERROR = "Erro na inserção do Student";
+	private static final String MSG_ERROR = "Erro na insercao do Student";
 
 
 }
