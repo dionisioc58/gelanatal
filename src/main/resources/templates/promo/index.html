@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorator="layout">
+<head>
+ 	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Promoções</title>
+</head>
+<body>
+
+	<div layout:fragment="content">
+		<h1>Lista de promoções</h1>
+		<hr />
+		
+		<a th:href="@{/promos/new}" class="btn" style="background-color: #ff0">Cadastrar nova promoção</a><br/><br/>
+		
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Data</th> 
+					<th>Nome</th> 
+					<th>Tipo</th>
+					<th>Tamanho em ml</th>
+					<th>Valor R$</th>
+					<th>Local</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="promo : ${listPromo}">
+					<td th:text="${promo.data}"></td> 
+					<td th:text="${promo.nome}"></td>
+					<td th:text="${promo.tipo}"></td>
+					<td th:text="${promo.tamanho}"></td>
+					<td th:text="${promo.valor}"></td>
+					<td th:text="${promo.local}"></td> 
+					<td>
+							<a th:href="@{/promos/{id}(id = ${promo.id})}" class="btn" style="background-color: #ff0">Visualizar</a> 
+					 		<a th:href="@{/promos/{id}/edit(id = ${promo.id})}" class="btn" style="background-color: #ff0">Editar</a> 
+							<a th:href="${promo.id+'/delete'}" class="btn btn-danger">Deletar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

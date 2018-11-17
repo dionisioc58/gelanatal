@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
- 	<meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Layout</title>
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #ff0">
+	<head>
+	 	<meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	    <meta name="description" content="" />
+	    <meta name="author" content="" />
+	    <title>Home</title>
+	    
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	    
+	</head>
+	<body>
+	<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
 	    <div class="container">
 	        <div class="navbar-header">
 	            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -24,7 +25,6 @@
 	        </div>
 	        <div class="navbar-collapse collapse">
 	            <ul class="nav navbar-nav navbar-right">
-	            	<li><a href="/promos">Promoções</a></li>
 	            	<li><a href="/principals">Principal Registration</a></li>
 	                <li><a href="/students">Student Registration</a></li>
 	                <li><a href="/modules">Module Registration </a></li>
@@ -38,9 +38,8 @@
 		<div th:if="${error != null}" class="alert alert-danger" role="alert"><span th:text="${error}">msg error</span></div>
 	
 		<div layout:fragment="content">
-		  <p>Page content goes here</p>
+		  <h3>Minha Escola com Spring MVC Application</h3>
 		</div>
 	</div>	
-	
-</body>
+	</body>
 </html>

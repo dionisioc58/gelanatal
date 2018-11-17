@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>Promoção</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1 th:if="${promoid == null}">Nova promoção</h1>
+		<h1 th:if="${promo.id != null}">Editar promoção</h1>
+		<hr />
+		<form th:action="@{/promos}" th:method="@{${promo.id == null} ? 'post' : 'put'}"
+			th:object="${promo}">
+			<input type="hidden" th:field="*{id}" /> 
+			
+				<div class="form-group"> 
+					<label for="data">Data da promoção</label>  
+					<input id="data" name="data" type="date" class="form-control" th:field="*{data}" />  
+				</div> 
+				<div class="form-group"> 
+					<label for="nome">Nome da bebida</label>  
+					<input id="nome" name="nome" type="text" class="form-control" th:field="*{nome}" />  
+				</div> 
+				<div class="form-group"> 
+					<label for="tipo">Tipo (Lata, Long Neck, Garrafa)</label>  
+					<input id="tipo" name="tipo" type="text" class="form-control" th:field="*{tipo}" />  
+				</div> 
+				<div class="form-group"> 
+					<label for="tamanho">Tamanho(mililitros)</label>  
+					<input id="tamanho" name="tamanho" type="number" class="form-control" th:field="*{tamanho}" />  
+				</div> 
+				<div class="form-group"> 
+					<label for="valor">Valor R$ (Separe por ., ex.: 2.59)</label>  
+					<input id="valor" name="valor" type="text" class="form-control" th:field="*{valor}" />  
+				</div> 
+				<div class="form-group"> 
+					<label for="local">Local da promoção</label>  
+					<input id="local" name="local" type="text" class="form-control" th:field="*{local}" />  
+				</div> 
+				<div class="form-group"> 
+					<label for="validade">Validade da bebida</label>  
+					<input id="validade" name="validade" type="date" class="form-control" th:field="*{validade}" />  
+				</div> 
+				<div class="form-group"> 
+					<label for="qtd">Quantidade de bebidas no local</label>  
+					<input id="qtd" name="qtd" type="text" class="form-control" th:field="*{qtd}" />  
+				</div> 
+				<div class="form-group"> 
+					<label for="descricao">Descrição da bebida</label>  
+					<input id="descricao" name="descricao" type="text" class="form-control" th:field="*{descricao}" />  
+				</div> 
+
+			<button type="submit" class="btn" style="background-color: #ff0">Salvar</button>
+			<a th:href="@{/promos}" class="btn">Voltar</a>
+			
+			<hr />
+		</form>
+	</div>
+</body>
+</html>

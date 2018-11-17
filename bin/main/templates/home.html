@@ -13,8 +13,7 @@
 	    
 	</head>
 	<body>
-	<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #ff0">
 	    <div class="container">
 	        <div class="navbar-header">
 	            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -25,6 +24,7 @@
 	        </div>
 	        <div class="navbar-collapse collapse">
 	            <ul class="nav navbar-nav navbar-right">
+	            	<li><a href="/promos">Promoções</a></li>
 	            	<li><a href="/principals">Principal Registration</a></li>
 	                <li><a href="/students">Student Registration</a></li>
 	                <li><a href="/modules">Module Registration </a></li>
@@ -38,7 +38,7 @@
 		<div th:if="${error != null}" class="alert alert-danger" role="alert"><span th:text="${error}">msg error</span></div>
 	
 		<div layout:fragment="content">
-		  <h3>Minha Escola com Spring MVC Application</h3>
+			<h1>Seja bem vindo ao melhor site de promoções de bebidas de Natal-RN</h1>
 		</div>
 	</div>	
 	</body>
