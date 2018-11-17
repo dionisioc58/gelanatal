@@ -16,61 +16,50 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.example.model.Module;
-import com.example.model.Promo;
 import com.example.model.Usuario;
-import com.example.service.PromoService;
 import com.example.service.UsuarioService;
 
 @Controller
-@RequestMapping("/promos")
-public class PromoController {
+@RequestMapping("/usuarios")
+public class UsuarioController {
 
-	private static final String MSG_SUCESS_INSERT = "Promo inserted successfully.";
-	private static final String MSG_SUCESS_UPDATE = "Promo successfully changed.";
-	private static final String MSG_SUCESS_DELETE = "Deleted Promo successfully.";
+	private static final String MSG_SUCESS_INSERT = "Usuario inserted successfully.";
+	private static final String MSG_SUCESS_UPDATE = "Usuario successfully changed.";
+	private static final String MSG_SUCESS_DELETE = "Deleted Usuario successfully.";
 	private static final String MSG_ERROR = "Error.";
 
 	@Autowired
-	private PromoService promoService;
-	
-	@Autowired
 	private UsuarioService usuarioService;
+	
 
 	@GetMapping
 	public String index(Model model) {
-		List<Promo> all = promoService.findAll();
-		model.addAttribute("listPromo", all);
-		return "promo/index";
+		List<Usuario> all = usuarioService.findAll();
+		model.addAttribute("listUsuario", all);
+		return "usuario/index";
 	}
 	
 	@GetMapping("/{id}")
 	public String show(Model model, @PathVariable("id") Integer id) {
 		if (id != null) {
-			Promo promo = promoService.findOne(id).get();
-			model.addAttribute("promo", promo);
+			Usuario usuario = usuarioService.findOne(id).get();
+			model.addAttribute("usuario", usuario);
 		}
-		return "promo/show";
+		return "usuario/show";
 	}
 
 	@GetMapping(value = "/new")
-	public String create(Model model, @ModelAttribute Promo entityPromo, @ModelAttribute Usuario entityUsuario) {
-		// model.addAttribute("promo", entityPromo);
+	public String create(Model model, @ModelAttribute Usuario entityUsuario) {
+		// model.addAttribute("usuario", entityUsuario);
 		
-		List<Usuario> all = usuarioService.findAll();
-		model.addAttribute("usuarios", all);
-		
-		return "promo/form";
+		return "usuario/form";
 	}
 	
 	@PostMapping
-	public String create(@Valid @ModelAttribute Promo entity, 
-						@Valid @ModelAttribute Usuario entityUsuario,
-						BindingResult result, RedirectAttributes redirectAttributes) {
-		Promo promo = null;
+	public String create(@Valid @ModelAttribute Usuario entity, BindingResult result, RedirectAttributes redirectAttributes) {
+		Usuario usuario = null;
 		try {
-			promo = promoService.save(entity);
+			usuario = usuarioService.save(entity);
 			redirectAttributes.addFlashAttribute("success", MSG_SUCESS_INSERT);
 		} catch (Exception e) {
 			System.out.println("Exception:: exception");
@@ -81,51 +70,48 @@ public class PromoController {
 			e.printStackTrace();
 			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
 		}
-		return "redirect:/promos/" + promo.getId();
+		return "redirect:/usuarios/" + usuario.getId();
 	}
 	
 	@GetMapping("/{id}/edit")
 	public String update(Model model, @PathVariable("id") Integer id) {
 		try {
 			if (id != null) {
-				List<Usuario> all = usuarioService.findAll();
-				model.addAttribute("usuarios", all);
-				
-				Promo entity = promoService.findOne(id).get();
-				model.addAttribute("promo", entity);
+				Usuario entity = usuarioService.findOne(id).get();
+				model.addAttribute("usuario", entity);
 			}
 		} catch (Exception e) {
 			throw new ServiceException(e.getMessage());
 		}
-		return "promo/form";
+		return "usuario/form";
 	}
 	
 	@PutMapping
-	public String update(@Valid @ModelAttribute Promo entity, BindingResult result, RedirectAttributes redirectAttributes) {
-		Promo promo = null;
+	public String update(@Valid @ModelAttribute Usuario entity, BindingResult result, RedirectAttributes redirectAttributes) {
+		Usuario usuario = null;
 		try {
-			promo = promoService.save(entity);
+			usuario = usuarioService.save(entity);
 			redirectAttributes.addFlashAttribute("success", MSG_SUCESS_UPDATE);
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
 			e.printStackTrace();
 		}
-		return "redirect:/promos/" + promo.getId();
+		return "redirect:/usuarios/" + usuario.getId();
 	}
 	
 	@RequestMapping("/{id}/delete")
 	public String delete(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
 		try {
 			if (id != null) {
-				Promo entity = promoService.findOne(id).get();
-				promoService.delete(entity);
+				Usuario entity = usuarioService.findOne(id).get();
+				usuarioService.delete(entity);
 				redirectAttributes.addFlashAttribute("success", MSG_SUCESS_DELETE);
 			}
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
 			throw new ServiceException(e.getMessage());
 		}
-		return "redirect:/promos/";
+		return "redirect:/usuarios/";
 	}
 
 }

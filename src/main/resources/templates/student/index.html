@@ -33,8 +33,8 @@
 					<td th:text="${student.registration}"></td>
 					<td th:text="${student.module}"></td>  
 					<td>
-							<a th:href="@{/students/{id}(id = ${student.id})}" class="btn btn-primary" >Show</a> 
-					 		<a th:href="@{/students/{id}/edit(id = ${student.id})}" class="btn btn-info">Edit</a> 
+							<a th:href="@{/students/{id}(id = ${student.id})}" class="btn btn-primary  >Show</a> 
+					 		<a th:href="@{/students/{id}/edit(id = ${student.id})}" class="btn btn-info >Edit</a> 
 					 		<a th:href="${'students/'+ student.id +'/delete'}" class="btn btn-danger">Destroy</a>
 					</td>
 				</tr>
