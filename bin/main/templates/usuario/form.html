@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>Usuário</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1 th:if="${usuario.id == null}">Novo usuário</h1>
+		<h1 th:if="${usuario.id != null}">Editar usuário</h1>
+		<hr />
+		<form th:action="@{/usuarios}"
+			th:method="@{${usuario.id == null} ? 'post' : 'put'}"
+			th:object="${usuario}">
+			<input type="hidden" th:field="*{id}" />
+
+			<div class="form-group"> 
+				<label for="nome">Nome</label>  
+				<input id="nome" name="nome" type="text" class="form-control" th:field="*{nome}" />  
+			</div>
+			<div class="form-group">
+				<label for="email">Email</label> 
+				<input id="email" name="email" type="text" class="form-control" th:field="*{email}" />
+			</div>
+
+			<button type="submit" class="btn" style="background-color: #ff0"> Salvar</button>
+			<a th:href="@{/usuarios}" class="btn btn-default">Voltar</a>
+		</form>
+	</div>
+</body>
+</html>
