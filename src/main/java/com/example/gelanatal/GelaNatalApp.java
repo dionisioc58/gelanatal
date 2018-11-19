@@ -8,10 +8,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackages="com.example")
 @EntityScan("com.example.model")
 @EnableJpaRepositories("com.example.repository")
-public class DemoApplication {
+public class GelaNatalApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(GelaNatalApp.class, args);
 	}
 }
 
