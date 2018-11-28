@@ -1,5 +1,17 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+    }
+}
+
 apply plugin: 'java'
-apply plugin: 'maven'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -15,19 +27,21 @@ tasks.withType(JavaCompile) {
 
 
 repositories {
-        
-     maven { url "http://repo.maven.apache.org/maven2" }
+     mavenCentral()  
+     //maven { url "http://repo.maven.apache.org/maven2" }
 }
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version:'2.0.4.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version:'2.0.4.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'2.0.4.RELEASE'
+    compile("org.springframework.boot:spring-boot-starter-security")
     compile group: 'javax.xml.bind', name: 'jaxb-api', version:'2.3.0'
     compile group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version:'2.3.0'
     //compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
 
     runtime group: 'mysql', name: 'mysql-connector-java', version:'5.1.46'
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'2.0.4.RELEASE'
+    testCompile("org.springframework.security:spring-security-test")
     // https://mvnrepository.com/artifact/org.hsqldb/hsqldb
 	// testCompile group: 'org.hsqldb', name: 'hsqldb', version: '2.4.1'
 	runtime group: 'com.h2database', name: 'h2', version: '1.4.197'
