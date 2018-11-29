@@ -33,7 +33,7 @@ public class PromoController {
 
 	@Autowired
 	private PromoService promoService;
-	
+
 	@Autowired
 	private UsuarioService usuarioService;
 
@@ -43,7 +43,7 @@ public class PromoController {
 		model.addAttribute("listPromo", all);
 		return "promo/index";
 	}
-	
+
 	@GetMapping("/{id}")
 	public String show(Model model, @PathVariable("id") Integer id) {
 		if (id != null) {
@@ -56,17 +56,16 @@ public class PromoController {
 	@GetMapping(value = "/new")
 	public String create(Model model, @ModelAttribute Promo entityPromo, @ModelAttribute Usuario entityUsuario) {
 		// model.addAttribute("promo", entityPromo);
-		
+
 		List<Usuario> all = usuarioService.findAll();
 		model.addAttribute("usuarios", all);
-		
+
 		return "promo/form";
 	}
-	
+
 	@PostMapping
-	public String create(@Valid @ModelAttribute Promo entity, 
-						@Valid @ModelAttribute Usuario entityUsuario,
-						BindingResult result, RedirectAttributes redirectAttributes) {
+	public String create(@Valid @ModelAttribute Promo entity, @Valid @ModelAttribute Usuario entityUsuario,
+			BindingResult result, RedirectAttributes redirectAttributes) {
 		Promo promo = null;
 		try {
 			promo = promoService.save(entity);
@@ -75,21 +74,21 @@ public class PromoController {
 			System.out.println("Exception:: exception");
 			e.printStackTrace();
 			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
-		}catch (Throwable e) {
+		} catch (Throwable e) {
 			System.out.println("Throwable:: exception");
 			e.printStackTrace();
 			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
 		}
 		return "redirect:/promos/" + promo.getId();
 	}
-	
+
 	@GetMapping("/{id}/edit")
 	public String update(Model model, @PathVariable("id") Integer id) {
 		try {
 			if (id != null) {
 				List<Usuario> all = usuarioService.findAll();
 				model.addAttribute("usuarios", all);
-				
+
 				Promo entity = promoService.findOne(id).get();
 				model.addAttribute("promo", entity);
 			}
@@ -98,9 +97,10 @@ public class PromoController {
 		}
 		return "promo/form";
 	}
-	
+
 	@PutMapping
-	public String update(@Valid @ModelAttribute Promo entity, BindingResult result, RedirectAttributes redirectAttributes) {
+	public String update(@Valid @ModelAttribute Promo entity, BindingResult result,
+			RedirectAttributes redirectAttributes) {
 		Promo promo = null;
 		try {
 			promo = promoService.save(entity);
@@ -111,7 +111,7 @@ public class PromoController {
 		}
 		return "redirect:/promos/" + promo.getId();
 	}
-	
+
 	@RequestMapping("/{id}/delete")
 	public String delete(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
 		try {

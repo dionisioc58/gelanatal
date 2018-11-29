@@ -23,10 +23,10 @@ import com.example.service.UsuarioService;
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
-	private static final String MSG_SUCESS_INSERT = "Usuario inserted successfully.";
-	private static final String MSG_SUCESS_UPDATE = "Usuario successfully changed.";
-	private static final String MSG_SUCESS_DELETE = "Deleted Usuario successfully.";
-	private static final String MSG_ERROR = "Error.";
+	private static final String MSG_SUCESS_INSERT = "Usuario inserido com sucesso.";
+	private static final String MSG_SUCESS_UPDATE = "Usuario alterado com sucesso.";
+	private static final String MSG_SUCESS_DELETE = "Usuario removido com sucesso.";
+	private static final String MSG_ERROR = "Erro.";
 
 	@Autowired
 	private UsuarioService usuarioService;
@@ -113,5 +113,4 @@ public class UsuarioController {
 		}
 		return "redirect:/usuarios/";
 	}
-
 }

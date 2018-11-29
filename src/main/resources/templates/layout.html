@@ -26,6 +26,13 @@
 	            <ul class="nav navbar-nav navbar-right">
 	            	<li><a href="/promos">Promoções</a></li>
 	            	<li><a href="/usuarios">Usuários</a></li>
+	            	<li><a href="/login"
+						th:if="${#httpServletRequest.remoteUser == null}">Login</a></li>
+					<li><a th:if="${#httpServletRequest.remoteUser != null}">
+						<form th:action="@{/logout}" method="post">
+							<input type="submit" value="Sign Out" />
+						</form>
+					</a></li>
 	            </ul>
 	        </div>
 	    </div>

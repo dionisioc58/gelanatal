@@ -1,17 +1,19 @@
 package com.example.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import com.example.model.Usuario;
-import com.example.repository.UsuarioRepository;
-import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.example.model.Usuario;
+import com.example.repository.UsuarioRepository;
 
 @Service
 @Transactional(readOnly = true)
 public class UsuarioService {
-
+	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
@@ -21,6 +23,10 @@ public class UsuarioService {
 
 	public Optional<Usuario> findOne(Integer id) {
 		return usuarioRepository.findById(id);
+	}
+	
+	public Optional<Usuario> findByEmail(String email) {
+		return usuarioRepository.findByEmail(email);
 	}
 	
 	@Transactional(readOnly = false)
