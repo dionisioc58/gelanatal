@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.dao.AppCurtidaDAO;
 import com.example.model.Curtida;
 import com.example.repository.CurtidaRepository;
 
@@ -16,6 +17,9 @@ public class CurtidaService {
 	
 	@Autowired
 	private CurtidaRepository curtidaRepository;
+	
+	@Autowired
+	private AppCurtidaDAO appCurtidaDAO;
 
 	public List<Curtida> findAll() {
 		return curtidaRepository.findAll();
@@ -26,7 +30,10 @@ public class CurtidaService {
 	}
 	
 	@Transactional(readOnly = false)
-	public Curtida save(Curtida entity) {
+	public Curtida save(Curtida entity) throws Exception {
+		if(appCurtidaDAO.existPromoUser(entity)) {
+			throw new Exception("Curtida já realizada!");
+		}
 		return curtidaRepository.save(entity);
 	}
 

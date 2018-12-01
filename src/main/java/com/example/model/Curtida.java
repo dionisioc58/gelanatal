@@ -32,6 +32,12 @@ public class Curtida implements Serializable {
 		
 	}
 	
+	public Curtida(int id, Promo promo, Usuario usuario) {
+		this.id = id;
+		this.promo = promo;
+		this.usuario = usuario;
+	}
+	
 	public Curtida(Promo promo, Usuario usuario) {
 		this.promo = promo;
 		this.usuario = usuario;

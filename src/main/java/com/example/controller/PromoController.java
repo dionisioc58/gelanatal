@@ -122,8 +122,9 @@ public class PromoController {
 				redirectAttributes.addFlashAttribute("success", MSG_SUCESS_LIKE);
 			}
 		} catch (Exception e) {
-			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
-			throw new ServiceException(e.getMessage());
+			System.out.println("Exception:: exception");
+			e.printStackTrace();
+			redirectAttributes.addFlashAttribute("error", MSG_ERROR + " " + e.getMessage());
 		}
 		return "redirect:/promos/";
 	}

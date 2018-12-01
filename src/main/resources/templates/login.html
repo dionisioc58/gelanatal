@@ -12,11 +12,11 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		<div th:if="${param.error}">Usuário e/ou senha inválidos.</div>
+		<div th:if="${param.error}">Email e/ou senha inválidos.</div>
 		<div th:if="${param.logout}">Desconectado.</div>
 		<form th:action="@{/login}" method="post">
 			<div class="form-group">
-				<label>Usuário:</label>
+				<label>Email:</label>
 				<input type="text" name="username" class="form-control"/>
 				
 			</div>
