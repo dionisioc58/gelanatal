@@ -33,5 +33,19 @@ public class AppUsuarioDAO extends JdbcDaoSupport {
 			return null;
 		}
 	}
+	
+	public Usuario findUserByEmail(String email) {
+		// Select .. from App_User u Where u.User_Name = ?
+		String sql = UsuarioMapper.BASE_SQL + " where u.email = ? ";
+
+		Object[] params = new Object[] { email };
+		UsuarioMapper mapper = new UsuarioMapper();
+		try {
+			Usuario userInfo = this.getJdbcTemplate().queryForObject(sql, params, mapper);
+			return userInfo;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
 
 }

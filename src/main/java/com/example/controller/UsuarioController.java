@@ -72,16 +72,17 @@ public class UsuarioController {
 		try {
 			usuario = usuarioService.save(entity);
 			redirectAttributes.addFlashAttribute("success", MSG_SUCESS_INSERT);
+			return "redirect:/usuarios/" + usuario.getId();
 		} catch (Exception e) {
 			System.out.println("Exception:: exception");
 			e.printStackTrace();
-			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
+			redirectAttributes.addFlashAttribute("error", MSG_ERROR + " " + e.getMessage());
 		} catch (Throwable e) {
 			System.out.println("Throwable:: exception");
 			e.printStackTrace();
 			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
 		}
-		return "redirect:/usuarios/" + usuario.getId();
+		return "redirect:/usuarios/";
 	}
 
 	@GetMapping("/{id}/edit")
