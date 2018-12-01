@@ -6,6 +6,8 @@ import javax.validation.Valid;
 
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,8 +19,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.dao.AppUsuarioDAO;
+import com.example.model.Curtida;
 import com.example.model.Promo;
 import com.example.model.Usuario;
+import com.example.service.CurtidaService;
 import com.example.service.PromoService;
 import com.example.service.UsuarioService;
 
@@ -29,13 +34,20 @@ public class PromoController {
 	private static final String MSG_SUCESS_INSERT = "Promo inserted successfully.";
 	private static final String MSG_SUCESS_UPDATE = "Promo successfully changed.";
 	private static final String MSG_SUCESS_DELETE = "Deleted Promo successfully.";
-	private static final String MSG_ERROR = "Error.";
-
+	private static final Object MSG_SUCESS_LIKE   = "Curtida realizada com sucesso.";
+	private static final String MSG_ERROR         = "Error.";
+	
 	@Autowired
 	private PromoService promoService;
 
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private CurtidaService curtidaService;
+	
+	@Autowired
+	private AppUsuarioDAO appUsuarioDAO;
 
 	@GetMapping
 	public String index(Model model) {
@@ -96,6 +108,24 @@ public class PromoController {
 			throw new ServiceException(e.getMessage());
 		}
 		return "promo/form";
+	}
+	
+	@GetMapping("/{id}/like")
+	public String curtir(Model model, @PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
+		try {
+			if (id != null) {
+				Promo entity = promoService.findOne(id).get();
+				Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+				Usuario usuario = appUsuarioDAO.findUserAccount(auth.getName());
+				Curtida curtida = new Curtida(entity, usuario);
+				curtidaService.save(curtida);
+				redirectAttributes.addFlashAttribute("success", MSG_SUCESS_LIKE);
+			}
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
+			throw new ServiceException(e.getMessage());
+		}
+		return "redirect:/promos/";
 	}
 
 	@PutMapping

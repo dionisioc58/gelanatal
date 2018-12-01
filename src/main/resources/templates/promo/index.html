@@ -26,6 +26,7 @@
 					<th>Tamanho em ml</th>
 					<th>Valor R$</th>
 					<th>Local</th>
+					<th>Curtidas</th>
 					<th>Acões</th>
 				</tr>
 			</thead>
@@ -36,11 +37,13 @@
 					<td th:text="${promo.tipo}"></td>
 					<td th:text="${promo.tamanho}"></td>
 					<td th:text="${promo.valor}"></td>
-					<td th:text="${promo.local}"></td> 
+					<td th:text="${promo.local}"></td>
+					<td th:text="${promo.curtidas.size()}"></td> 
 					<td>
-							<a th:href="@{/promos/{id}(id = ${promo.id})}" class="btn" style="background-color: #ff0">Visualizar</a> 
-					 		<a th:href="@{/promos/{id}/edit(id = ${promo.id})}" class="btn" style="background-color: #ff0">Editar</a> 
-							<a th:href="${promo.id+'/delete'}" class="btn btn-danger">Deletar</a>
+						<a th:href="@{/promos/{id}(id = ${promo.id})}" class="btn btn-primary">Visualizar</a> 
+						<a th:href="@{/promos/{id}/edit(id = ${promo.id})}" class="btn btn-primary">Editar</a> 
+						<a th:href="@{/promos/{id}/like(id = ${promo.id})}" class="btn btn-warning">Curtir</a>
+						<a th:href="${promo.id+'/delete'}" class="btn btn-danger">Deletar</a>
 					</td>
 				</tr>
 			</tbody>

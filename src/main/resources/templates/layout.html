@@ -35,11 +35,8 @@
 					<li><a href="/perfis">Perfis</a></li>
 					<li><a href="/login"
 						th:if="${#httpServletRequest.remoteUser == null}">Login</a></li>
-					<li><a th:if="${#httpServletRequest.remoteUser != null}">
-							<form th:action="@{/logout}" method="post">
-								<input type="submit" value="Sign Out" />
-							</form>
-					</a></li>
+					<li><a th:if="${#httpServletRequest.remoteUser != null}"
+						th:href="@{/logout}">Logout</a></li>
 				</ul>
 			</div>
 		</div>

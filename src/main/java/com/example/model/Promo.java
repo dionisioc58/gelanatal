@@ -2,7 +2,9 @@ package com.example.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -52,7 +55,11 @@ public class Promo implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
-
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "promo_id")
+    List<Curtida> curtidas;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -139,5 +146,13 @@ public class Promo implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}	
+	}
+	
+	public List<Curtida> getCurtidas() {
+		return this.curtidas; 
+	}
+	
+	public void curtir() {
+		
+	}
 }

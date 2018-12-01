@@ -26,7 +26,7 @@ public class UsuarioDetalhesServiceImpl implements UserDetailsService {
     private AppPerfisDAO appPerfilDAO;
  
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        Usuario appUsuario = this.appUsuarioDAO.findUserAccount(userName);
+        Usuario appUsuario = this.appUsuarioDAO.findUserByEmail(userName);
  
         if (appUsuario == null) {
             System.out.println("Usuário não encontrado! " + userName);
