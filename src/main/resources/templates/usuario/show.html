@@ -2,52 +2,70 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="layout">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-		<meta name="description" content="" />
-		<meta name="author" content="" />
-		<title>Usuário</title>
-	</head>
-	<body>
-		<div layout:fragment="content">
-			<h1>Usuário</h1>
-			<hr />
-			<div class="form-group"> 
-				<label for="nome">Nome: </label>  
-				<span th:text="${usuario.nome}"></span> 
-			</div> 
-			<div class="form-group"> 
-				<label for="email">Email: </label>  
-				<span th:text="${usuario.email}"></span> 
-			</div>
-			<div class="form-group"> 
-				<label for="senha">Senha: </label>  
-				<span th:text="${usuario.senha}"></span> 
-			</div>
-			
-			<h1> PROMOÇÕES CADASTRADAS POR ESSE USUÁRIO</h1>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>Usuário</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1>Usuário</h1>
+		<hr />
+		<div class="form-group">
+			<label for="nome">Nome: </label> <span th:text="${usuario.nome}"></span>
+		</div>
+		<div class="form-group">
+			<label for="email">Email: </label> <span th:text="${usuario.email}"></span>
+		</div>
+
+		<div class="form-group">
+			<label for="ativo">Situação: </label> <span
+				th:text="${usuario.ativo} ? 'Ativo' : 'Desativado'"></span>
+		</div>
+
+		<div class="form-group">
 			<table class="table">
+				<thead>
+					<tr>
+						<th>Perfil</th>
+						<th>Ação</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="perfil : ${usuario.perfis}">
+						<td th:text="${perfil}"></td>
+						<td><a th:href="@{/usuarios/{id}/removeperfil/{perfil}(id = ${usuario.id}, perfil = ${perfil.id})}" class="btn btn-primary">Remover</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h3>PROMOÇÕES CADASTRADAS POR ESSE USUÁRIO</h3>
+		<table class="table">
 			<thead>
 				<tr>
-					<th>Nome da bebida</th> 
-					<th>Local da promoção</th> 
+					<th>Nome da bebida</th>
+					<th>Local da promoção</th>
 					<th>Valor R$</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="promo : ${usuario.promos}">
-					<td th:text="${promo.nome}"></td> 
+					<td th:text="${promo.nome}"></td>
 					<td th:text="${promo.local}"></td>
-					<td th:text="${promo.valor}"></td>  
+					<td th:text="${promo.valor}"></td>
 				</tr>
 			</tbody>
 		</table>
-			
-			<a th:href="@{/usuarios}" class="btn btn-primary" >Voltar</a> 
-			<a th:href="@{/usuarios/{id}/edit(id = ${usuario.id})}" class="btn" style="background-color: #ff0">Editar</a>
-			<a th:href="${usuario.id +'/delete'}" class="btn btn-danger">Deletar</a>
-			
-		</div>
-	</body>
+
+		<a th:href="@{/usuarios}" class="btn btn-primary">Voltar</a> <a
+			th:href="@{/usuarios/{id}/edit(id = ${usuario.id})}" class="btn"
+			style="background-color: #ff0">Editar</a> <a
+			th:href="${usuario.id +'/delete'}" class="btn btn-danger">Deletar</a>
+
+	</div>
+</body>
 </html>

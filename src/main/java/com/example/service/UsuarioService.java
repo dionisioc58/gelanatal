@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,12 +26,15 @@ public class UsuarioService {
 		return usuarioRepository.findById(id);
 	}
 	
-	public Optional<Usuario> findByEmail(String email) {
-		return usuarioRepository.findByEmail(email);
+	@Transactional(readOnly = false)
+	public Usuario save(Usuario entity) {
+		String encoded = new BCryptPasswordEncoder().encode(entity.getSenha());
+		entity.setSenha(encoded);
+		return usuarioRepository.save(entity);
 	}
 	
 	@Transactional(readOnly = false)
-	public Usuario save(Usuario entity) {
+	public Usuario savePerfil(Usuario entity) {
 		return usuarioRepository.save(entity);
 	}
 

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>Perfis de Usuário</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1 th:if="${perfil.id == null}">Novo perfil</h1>
+		<h1 th:if="${perfil.id != null}">Editar perfil</h1>
+		<hr />
+		<form th:action="@{/perfis}"
+			th:method="@{${perfil.id == null} ? 'post' : 'put'}"
+			th:object="${perfil}">
+			<input type="hidden" th:field="*{id}" />
+
+			<div class="form-group"> 
+				<label for="nome">Nome</label>  
+				<input id="nome" name="nome" type="text" class="form-control" th:field="*{nome}" />  
+			</div>
+			
+			<button type="submit" class="btn" style="background-color: #ff0"> Salvar</button>
+			<a th:href="@{/perfis}" class="btn btn-default">Voltar</a>
+		</form>
+	</div>
+</body>
+</html>

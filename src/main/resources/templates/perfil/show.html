@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<title>Perfil</title>
+	</head>
+	<body>
+		<div layout:fragment="content">
+			<h1>Perfil</h1>
+			<hr />
+			<div class="form-group"> 
+				<label for="nome">Nome: </label>  
+				<span th:text="${perfil.nome}"></span> 
+			</div>
+			
+			<a th:href="@{/perfis}" class="btn btn-primary" >Voltar</a> 
+			<a th:href="@{/perfis/{id}/edit(id = ${perfil.id})}" class="btn" style="background-color: #ff0">Editar</a>
+			<a th:href="${perfil.id +'/delete'}" class="btn btn-danger">Deletar</a>
+			
+		</div>
+	</body>
+</html>

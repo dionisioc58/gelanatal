@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		<h1 th:if="${promoid == null}">Nova promoção</h1>
+		<h1 th:if="${promo.id == null}">Nova promoção</h1>
 		<h1 th:if="${promo.id != null}">Editar promoção</h1>
 		<hr />
 		<form th:action="@{/promos}" th:method="@{${promo.id == null} ? 'post' : 'put'}"

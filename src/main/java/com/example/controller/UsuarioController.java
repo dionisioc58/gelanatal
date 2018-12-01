@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.example.model.Usuario;
+import com.example.model.UsuarioPerfil;
+import com.example.service.UsuarioPerfilService;
 import com.example.service.UsuarioService;
 
 @Controller
@@ -31,6 +34,8 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
+	@Autowired
+	private UsuarioPerfilService usuarioPerfilService;
 
 	@GetMapping
 	public String index(Model model) {
@@ -38,7 +43,7 @@ public class UsuarioController {
 		model.addAttribute("listUsuario", all);
 		return "usuario/index";
 	}
-	
+
 	@GetMapping("/{id}")
 	public String show(Model model, @PathVariable("id") Integer id) {
 		if (id != null) {
@@ -51,12 +56,13 @@ public class UsuarioController {
 	@GetMapping(value = "/new")
 	public String create(Model model, @ModelAttribute Usuario entityUsuario) {
 		// model.addAttribute("usuario", entityUsuario);
-		
+
 		return "usuario/form";
 	}
-	
+
 	@PostMapping
-	public String create(@Valid @ModelAttribute Usuario entity, BindingResult result, RedirectAttributes redirectAttributes) {
+	public String create(@Valid @ModelAttribute Usuario entity, BindingResult result,
+			RedirectAttributes redirectAttributes) {
 		Usuario usuario = null;
 		try {
 			usuario = usuarioService.save(entity);
@@ -65,14 +71,14 @@ public class UsuarioController {
 			System.out.println("Exception:: exception");
 			e.printStackTrace();
 			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
-		}catch (Throwable e) {
+		} catch (Throwable e) {
 			System.out.println("Throwable:: exception");
 			e.printStackTrace();
 			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
 		}
 		return "redirect:/usuarios/" + usuario.getId();
 	}
-	
+
 	@GetMapping("/{id}/edit")
 	public String update(Model model, @PathVariable("id") Integer id) {
 		try {
@@ -85,9 +91,28 @@ public class UsuarioController {
 		}
 		return "usuario/form";
 	}
-	
+
+	@GetMapping("/{id}/removeperfil/{perfil}")
+	public String removeperfil(Model model, @PathVariable("id") Integer id, @PathVariable("perfil") Integer perfilid,
+			RedirectAttributes redirectAttributes) {
+		Usuario entity = null;
+		try {
+			if (id != null && perfilid != null) {
+				entity = usuarioService.findOne(id).get();
+				UsuarioPerfil up = usuarioPerfilService.findOne(perfilid).get();
+				usuarioPerfilService.delete(up);
+				redirectAttributes.addFlashAttribute("success", MSG_SUCESS_UPDATE);
+			}
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
+			throw new ServiceException(e.getMessage());
+		}
+		return "redirect:/usuarios/" + entity.getId();
+	}
+
 	@PutMapping
-	public String update(@Valid @ModelAttribute Usuario entity, BindingResult result, RedirectAttributes redirectAttributes) {
+	public String update(@Valid @ModelAttribute Usuario entity, BindingResult result,
+			RedirectAttributes redirectAttributes) {
 		Usuario usuario = null;
 		try {
 			usuario = usuarioService.save(entity);
@@ -98,7 +123,7 @@ public class UsuarioController {
 		}
 		return "redirect:/usuarios/" + usuario.getId();
 	}
-	
+
 	@RequestMapping("/{id}/delete")
 	public String delete(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
 		try {
