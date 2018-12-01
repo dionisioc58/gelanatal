@@ -31,18 +31,26 @@
 				<thead>
 					<tr>
 						<th>Perfil</th>
-						<th>Ação</th>
+						<th>Ação
+							<a
+							th:href="@{/usuarios/{id}/addperfil/(id = ${usuario.id})}"
+							class="btn btn-primary">Adicionar</a>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="perfil : ${usuario.perfis}">
 						<td th:text="${perfil}"></td>
-						<td><a th:href="@{/usuarios/{id}/removeperfil/{perfil}(id = ${usuario.id}, perfil = ${perfil.id})}" class="btn btn-primary">Remover</a></td>
+						<td><a
+							th:href="@{/usuarios/{id}/removeperfil/{perfil}(id = ${usuario.id}, perfil = ${perfil.id})}"
+							class="btn btn-primary">Remover</a></td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 
+		<hr>
+		<br>
 		<h3>PROMOÇÕES CADASTRADAS POR ESSE USUÁRIO</h3>
 		<table class="table">
 			<thead>

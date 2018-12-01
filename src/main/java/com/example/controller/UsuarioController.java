@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.model.Perfil;
 import com.example.model.Usuario;
 import com.example.model.UsuarioPerfil;
+import com.example.service.PerfilService;
 import com.example.service.UsuarioPerfilService;
 import com.example.service.UsuarioService;
 
@@ -36,6 +38,9 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioPerfilService usuarioPerfilService;
+	
+	@Autowired
+	private PerfilService perfilService;
 
 	@GetMapping
 	public String index(Model model) {
@@ -109,7 +114,46 @@ public class UsuarioController {
 		}
 		return "redirect:/usuarios/" + entity.getId();
 	}
-
+	
+	@GetMapping("/{id}/addperfil")
+	public String addPerfil(Model model, @PathVariable("id") Integer id) {
+		try {
+			if (id != null) {
+				Usuario entity = usuarioService.findOne(id).get();
+				List<Perfil> perfis = perfilService.findExcept(entity.getPerfis()); 
+				model.addAttribute("usuario", entity);
+				model.addAttribute("perfis", perfis);
+			}
+		} catch (Exception e) {
+			throw new ServiceException(e.getMessage());
+		}
+		return "usuario/addperfil";
+	}
+	
+	@PostMapping("/{id}/addperfil")
+	public String savePerfil(@Valid @ModelAttribute Perfil entity, BindingResult result,
+			RedirectAttributes redirectAttributes, @PathVariable("id") Integer id) {
+		Usuario usuario = null;
+		try {
+			usuario = usuarioService.findOne(id).get();
+			UsuarioPerfil up = new UsuarioPerfil();
+			Perfil p = perfilService.findOne(((Perfil) entity).getId()).get();
+			up.setPerfil(p);
+			up.setUsuario(usuario);
+			usuarioPerfilService.save(up);
+			redirectAttributes.addFlashAttribute("success", MSG_SUCESS_INSERT);
+		} catch (Exception e) {
+			System.out.println("Exception:: exception");
+			e.printStackTrace();
+			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
+		} catch (Throwable e) {
+			System.out.println("Throwable:: exception");
+			e.printStackTrace();
+			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
+		}
+		return "redirect:/usuarios/" + usuario.getId();
+	}
+	
 	@PutMapping
 	public String update(@Valid @ModelAttribute Usuario entity, BindingResult result,
 			RedirectAttributes redirectAttributes) {

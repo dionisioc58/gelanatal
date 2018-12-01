@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<title>Usuário - Adicionar Perfil</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<h1>Adicionar Perfil</h1>
+		<hr />
+		<form th:action="@{/usuarios/{id}/addperfil(id = ${usuario.id})}" th:method="post" th:object="${perfil}">
+			<div class="form-group"> 
+				<label for="perfil">Perfil</label>
+				<select name="id" class="form-control">
+					<option value="">...</option>
+					<option th:each="p : ${perfis}" th:value="${p.id}"
+						th:text="${p.nome}"></option>
+				</select>
+			</div>
+			
+			<button type="submit" class="btn" style="background-color: #ff0"> Salvar</button>
+			<a th:href="@{/usuarios/{id}(id = usuario.id)}" class="btn btn-default">Voltar</a>
+		</form>
+	</div>
+</body>
+</html>

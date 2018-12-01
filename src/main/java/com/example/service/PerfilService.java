@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.model.Perfil;
+import com.example.model.UsuarioPerfil;
 import com.example.repository.PerfilRepository;
 
 @Service
@@ -23,6 +24,15 @@ public class PerfilService {
 
 	public Optional<Perfil> findOne(Integer id) {
 		return perfilRepository.findById(id);
+	}
+	
+	public List<Perfil> findExcept(List<UsuarioPerfil> lista) {
+		List<Perfil> retorno = perfilRepository.findAll();
+		for(UsuarioPerfil exclude : lista) {
+			if(retorno.contains(exclude.getPerfil()))
+				retorno.remove(exclude.getPerfil());
+		}
+		return retorno;
 	}
 	
 	@Transactional(readOnly = false)
